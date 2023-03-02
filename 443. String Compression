@@ -1,0 +1,51 @@
+class Solution {
+    public int compress(char[] chars) {
+        int n=chars.length;
+        // Step 1
+        int index=0,i=0;
+        while(i<n){
+            char curr_char=chars[i];
+            int count=0;
+            // Step 2
+            while(i<n && curr_char==chars[i]){
+                count++;
+                i++;
+            }
+            // Step 3
+            chars[index++]=curr_char;
+            if(count>1){
+                String s=String.valueOf(count);
+                for(char ch:s.toCharArray()){
+                    chars[index++]=ch;
+                }
+                // System.out.print(s);
+            }
+        }
+        return index;
+    }
+}
+
+/* 
+Step 1:
+----------
+    At first initiallize two variable with 0 which will point the first index of the character array.
+        Then iterate a loop from 0 to array's length, and assing the first character with curr_char and initially count will be 0.
+
+Step 2:
+---------
+    In step 2 we are just counting the duplicate characters.
+
+Step 3:
+---------
+    After counting the duplicate characters now we just have to assign the values. Mean whenever you got the another element at that time you have to assing the curr_char at that index(line 15)
+
+    Now check is your duplicate elements is greater than 1.
+    e.g--> ["a","b","c"] it's output will be ["a","b","c"] 
+        not ["a","1","b","1","c","1"]
+    That is why.
+
+    If greater than 1 then just do a simple task and that is convert your integer count to string because
+    e.g.---> your count is 10 and you can't put it in a single block you have to put it like ["1","0"]
+
+    After converting the integer to string just assing it to the array's index and return the index.*/
+

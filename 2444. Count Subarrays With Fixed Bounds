@@ -1,0 +1,56 @@
+class Solution {
+    public long countSubarrays(int[] nums, int minK, int maxK) {
+        long ans=0;
+        // Step 1:
+        int min_k_pos=-1,max_k_pos=-1,culprit=-1;
+        for(int i=0;i<nums.length;i++){
+            // Step 2:
+            if(nums[i]<minK || nums[i]>maxK)culprit=i;
+            // Step 3:
+            if(nums[i]==minK)min_k_pos=i;
+            if(nums[i]==maxK)max_k_pos=i;
+            // Step 4:
+            int smaller=Math.min(min_k_pos,max_k_pos);
+            // Step 5:
+            int temp=smaller-culprit;
+            ans+=temp<=0?0:temp;
+        }
+        return ans;
+    }
+}
+/*
+        Intuition
+        ---------
+
+
+
+*/
+
+/*
+Step 1:
+-------
+    In first step just initialize the variable...min_k_pos(which will hold the index of minK element),max_k_pos(which will hold the index of maxK element),culprit(it would be that element position which is either smaller than the minK element or greater than the maxK element).
+
+Step 2:
+-------
+    In second step 2 i am just finding the culprit element postion(index)..as I told you what is culprit in the first step
+
+Step 3:
+------
+    min_k_pos and max_k_pos variables are holding the index of minK and maxK elements 
+
+Step 4:
+-------
+    Find the smaller index between min_k_pos and max_k_pos
+
+Step 5:
+-------
+    Subtract culprit from smaller 
+
+Step 6:
+------
+    If the result of subtraction is less than or equal to 0 then add 0 to the ans(because there will not be any subarray for sure) or else add it to the ans
+
+
+
+*/
